@@ -10,7 +10,7 @@ some ideas:
 - "what are the lemmas I could use to proceed"—GPT model issues a function call, backend logic finds the embeddings for all the hypotheses in the current context and find top X lemmas with the closest cosine similarity?
 - a user could also directly type in Coq commands or give GPT enough hints to infer the command needed. the latter case is a bit unlikely though, as GPT is bad at Coq
 - "what is the context"—GPT issues a function call then the backend shows the context
-- "go back X lines"/"go back to the line where I did a lia"—GPT moves the cursor to the desired position
+- "go back X lines"/"go back to the line where I did an lia"—GPT moves the cursor to the desired position
 - the user having to proactively ask for the context may be tedious. for each command issued, the chatbot should show what hypotheses are changed, introduced, deleted. of course the user can still ask for a summary by asking "what's the context"
 
 **copyright:** this repository is available under the 0BSD license. however, both Coq and coq-lsp are under LGPL. I only provide this source code, it's up to you to configure Coq and coq-lsp to make the whole thing work
