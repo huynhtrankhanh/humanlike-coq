@@ -14,5 +14,6 @@ some ideas:
 - "what is the context"—GPT issues a function call then the backend shows the context
 - "go back X lines"/"go back to the line where I did an lia"—GPT moves the cursor to the desired position
 - the user having to proactively ask for the context may be tedious. for each command issued, the chatbot should show what hypotheses are changed, introduced, deleted. of course the user can still ask for a summary by asking "what's the context"
+- using the whisper API, the user could say what they want, then that'd be converted into text, then the text is put into the model, and then the model acts on it
 
 **copyright:** this repository is available under the 0BSD license. however, both Coq and coq-lsp are under LGPL. I only provide this source code, it's up to you to configure Coq and coq-lsp to make the whole thing work
