@@ -1,4 +1,5 @@
 # humanlike-coq
+
 coq but acts more human. hopefully mobile friendly 👀
 
 this thing uses OpenAI's models and coq-lsp to make a chatbot interface for Coq. well not exactly chatbot, users have to perform some actions aside from chatting, for example selecting a line
@@ -6,6 +7,7 @@ this thing uses OpenAI's models and coq-lsp to make a chatbot interface for Coq.
 I hope I'll be able to pull this off and provide a video demo :)
 
 some ideas:
+
 - "show me the lines where I proved balanced(mirror(s)) <-> balanced(s)"—GPT model issues a function call with relevant keywords, then backend logic gets the embedding for the keyword and find the lines of code with the closest cosine similarity?
 - "what are the lemmas I could use to proceed"—GPT model issues a function call, backend logic finds the embeddings for all the hypotheses in the current context and finds top X lemmas with the closest cosine similarity?
 - a user could also directly type in Coq commands or give GPT enough hints to infer the command needed. the latter case is a bit unlikely though, as GPT is bad at Coq
