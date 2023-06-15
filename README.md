@@ -11,3 +11,4 @@ some ideas:
 - a user could also directly type in Coq commands or give GPT enough hints to infer the command needed. the latter case is a bit unlikely though, as GPT is bad at Coq
 - "what is the context"—GPT issues a function call then the backend shows the context
 - "go back X lines"/"go back to the line where I did a lia"—GPT moves the cursor to the desired position
+- the user having to proactively ask for the context may be tedious. for each command issued, the chatbot should show what hypotheses are changed, introduced, deleted. of course the user can still ask for a summary by asking "what's the context"
