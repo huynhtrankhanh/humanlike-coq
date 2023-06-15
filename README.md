@@ -16,7 +16,7 @@ some ideas:
 - the user having to proactively ask for the context may be tedious. for each command issued, the chatbot should show what hypotheses are changed, introduced, deleted. of course the user can still ask for a summary by asking "what's the context"
 - using the whisper API, the user could say what they want, then that'd be converted into text, then the text is put into the model, and then the model acts on it
 
-**is this similar to lean-chat?** the only similarity is both lean-chat and humanlike-coq touch the openai API. but lean-chat only translates natural language into code, it doesn't provide a complete solution to manipulate a big project. this thing does 
+**is this similar to lean-chat?** the only similarity is both lean-chat and humanlike-coq touch the openai API. but lean-chat only translates natural language into code, it doesn't provide a complete solution to manipulate a big project. this thing does
 
 the intention behind this thing is to explore how Coq could be adapted for mobile users. coding on mobile is more relaxing and flexible. if Coq can be used on mobile devices, this can drive a lot of users towards Coq
 
