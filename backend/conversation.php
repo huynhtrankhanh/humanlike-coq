@@ -42,12 +42,8 @@ class AssistantMessage extends Message {
     }
 
     public function toArray(): array {
-        $arr = [ 'role' => 'assistant' ];
-
-        if ($this->getContent() !== null) {
-            $arr['content'] = $this->getContent();
-        }
-
+        $arr = [ 'role' => 'assistant', 'content' => $this->getContent() ];
+        
         if ($this->getFunctionCall() !== null) {
             $arr['function_call'] = $this->getFunctionCall()->toArray();
         }
