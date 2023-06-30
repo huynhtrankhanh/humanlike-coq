@@ -1,41 +1,42 @@
 <?php
 
-require 'vendor/autoload.php';
+require "vendor/autoload.php";
 
 use GuzzleHttp\Client;
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
-$openai_api_key = $_ENV['OPENAI_API_KEY'];
+$openai_api_key = $_ENV["OPENAI_API_KEY"];
 
 $client = OpenAI::client($openai_api_key);
 
 $response = $client->chat()->create([
-    'model' => 'gpt-3.5-turbo-16k-0613',
-    'messages' => [
-        ['role' => 'user', 'content' => 'What\'s the weather like in Boston?'],
+    "model" => "gpt-3.5-turbo-16k-0613",
+    "messages" => [
+        ["role" => "user", "content" => 'What\'s the weather like in Boston?'],
     ],
-    'functions' => [
+    "functions" => [
         [
-            'name' => 'get_current_weather',
-            'description' => 'Get the current weather in a given location',
-            'parameters' => [
-                'type' => 'object',
-                'properties' => [
-                    'location' => [
-                        'type' => 'string',
-                        'description' => 'The city and state, e.g. San Francisco, CA',
+            "name" => "get_current_weather",
+            "description" => "Get the current weather in a given location",
+            "parameters" => [
+                "type" => "object",
+                "properties" => [
+                    "location" => [
+                        "type" => "string",
+                        "description" =>
+                            "The city and state, e.g. San Francisco, CA",
                     ],
-                    'unit' => [
-                        'type' => 'string',
-                        'enum' => ['celsius', 'fahrenheit']
+                    "unit" => [
+                        "type" => "string",
+                        "enum" => ["celsius", "fahrenheit"],
                     ],
                 ],
-                'required' => ['location'],
+                "required" => ["location"],
             ],
-        ]
-    ]
+        ],
+    ],
 ]);
 
 $response->id; // 'chatcmpl-6pMyfj1HF4QXnfvjtfzvufZSQq6Eq'
