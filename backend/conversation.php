@@ -2,28 +2,43 @@
 
 declare(strict_types=1);
 
-class FunctionCall {
-    private string $name;
-    private string $arguments;
+abstract class Message {
+    private string $content;
 
-    public function __construct(string $name, string $arguments) {
+    public function __construct(string $content) {
+        $this->content = $content;
+    }
+
+    public function getContent(): string {
+        return $this->content;
+    }
+}
+
+class UserMessage extends Message {}
+
+class AssistantMessage extends Message {
+    private ?FunctionCall $functionCall;
+
+    public function __construct(string $content, ?FunctionCall $functionCall = null) {
+        parent::__construct($content);
+        $this->functionCall = $functionCall;
+    }
+
+    public function getFunctionCall(): ?FunctionCall {
+        return $this->functionCall;
+    }
+}
+
+class FunctionMessage extends Message {
+    private string $name;
+
+    public function __construct(string $name, string $content) {
+        parent::__construct($content);
         $this->name = $name;
-        $this->arguments = $arguments;
     }
 
     public function getName(): string {
         return $this->name;
-    }
-
-    public function getArguments(): string {
-        return $this->arguments;
-    }
-
-    public function toArray(): array {
-        return [
-            'name' => $this->name,
-            'arguments' => $this->arguments,
-        ];
     }
 }
 
@@ -34,32 +49,8 @@ class Conversation {
         $this->messages = [];
     }
 
-    public function addUserMessage(string $content): void {
-        $this->messages[] = [
-            'type' => 'user',
-            'content' => $content,
-        ];
-    }
-
-    public function addAssistantMessage(?string $content, ?FunctionCall $functionCall = null): void {
-        $message = [
-            'type' => 'assistant',
-            'content' => $content,
-        ];
-
-        if ($functionCall !== null) {
-            $message['functionCall'] = $functionCall->toArray();
-        }
-
+    public function addMessage(Message $message): void {
         $this->messages[] = $message;
-    }
-
-    public function addFunctionMessage(string $name, string $content): void {
-        $this->messages[] = [
-            'type' => 'function',
-            'name' => $name,
-            'content' => $content,
-        ];
     }
 
     public function getMessages(): array {
