@@ -2,7 +2,8 @@
   "require": {
     "guzzlehttp/guzzle": "^7.7",
     "vlucas/phpdotenv": "^5.5",
-    "openai-php/client": "^0.6.1"
+    "openai-php/client": "^0.6.1",
+    "slim/slim": "^2.6"
   },
   "config": {
     "allow-plugins": {

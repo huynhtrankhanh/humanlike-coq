@@ -1,6 +1,9 @@
 <?php
+declare(strict_types=1);
 
 require "vendor/autoload.php";
+require_once "conversation.php"
+require_once "client_manager.php"
 
 use GuzzleHttp\Client;
 
@@ -57,4 +60,3 @@ foreach ($response->choices as $result) {
 $response->usage->promptTokens; // 82,
 $response->usage->completionTokens; // 18,
 $response->usage->totalTokens; // 100
-?>
