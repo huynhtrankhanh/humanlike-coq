@@ -2,8 +2,8 @@
 declare(strict_types=1);
 
 require "vendor/autoload.php";
-require_once "conversation.php"
-require_once "client_manager.php"
+require_once "conversation.php";
+require_once "client_manager.php";
 
 use GuzzleHttp\Client;
 
