@@ -50,20 +50,23 @@ class OpenAIClientManager
     }
 }
 
-class Parameter
+class ParameterDefinition
 {
-    private string $type; // type of the parameter
-    private string $description; // description of the parameter
+    private string $name;
+    private string $type;
+    private string $description;
 
-    public function __construct(string $type, string $description)
+    public function __construct(string $name, string $type, string $description)
     {
+        $this->name = $name;
         $this->type = $type;
         $this->description = $description;
     }
 
-    public function getParameter(): array
+    public function getDefinition(): array
     {
         return [
+            "name" => $this->name,
             "type" => $this->type,
             "description" => $this->description,
         ];
@@ -72,9 +75,9 @@ class Parameter
 
 class FunctionDefinition
 {
-    private string $name; // Name of the function
-    private string $description; // Description of the function
-    private array $parameters; // Array of parameters required by function
+    private string $name;
+    private string $description;
+    private array $parameters;
 
     public function __construct(
         string $name,
@@ -83,21 +86,31 @@ class FunctionDefinition
     ) {
         $this->name = $name;
         $this->description = $description;
-
         $this->parameters = [];
+
         foreach ($parameters as $parameter) {
-            if ($parameter instanceof Parameter) {
-                $this->parameters[] = $parameter->getParameter();
+            if ($parameter instanceof ParameterDefinition) {
+                $this->parameters[$parameter->getDefinition()['name']] = $parameter->getDefinition();
             }
         }
     }
 
     public function getDefinition(): array
     {
+        $parameter_definitions = [];
+        foreach ($this->parameters as $parameter) {
+            unset($parameter['name']);
+            $parameter_definitions[] = $parameter;
+        }
+
         return [
             "name" => $this->name,
             "description" => $this->description,
-            // "parameters" => $this->parameters,
+            "parameters" => [
+                "type" => "object",
+                "properties" => $this->parameters,
+                "required" => array_keys($this->parameters),
+            ]
         ];
     }
 }
