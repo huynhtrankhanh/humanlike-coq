@@ -57,8 +57,12 @@ class ParameterDefinition
     private string $description;
     private bool $isRequired;
 
-    public function __construct(string $name, string $type, string $description, bool $isRequired)
-    {
+    public function __construct(
+        string $name,
+        string $type,
+        string $description,
+        bool $isRequired
+    ) {
         $this->name = $name;
         $this->type = $type;
         $this->description = $description;
@@ -71,7 +75,7 @@ class ParameterDefinition
             "name" => $this->name,
             "type" => $this->type,
             "description" => $this->description,
-            "isRequired" => $this->isRequired
+            "isRequired" => $this->isRequired,
         ];
     }
 }
@@ -107,8 +111,10 @@ class FunctionDefinition
             unset($parameter["name"]);
             $parameter_definitions[] = $parameter;
         }
-        
-        $requiredParameters = array_filter($this->parameters, function ($parameter) {
+
+        $requiredParameters = array_filter($this->parameters, function (
+            $parameter
+        ) {
             return $parameter["isRequired"];
         });
 
