@@ -90,7 +90,9 @@ class FunctionDefinition
 
         foreach ($parameters as $parameter) {
             if ($parameter instanceof ParameterDefinition) {
-                $this->parameters[$parameter->getDefinition()['name']] = $parameter->getDefinition();
+                $this->parameters[
+                    $parameter->getDefinition()["name"]
+                ] = $parameter->getDefinition();
             }
         }
     }
@@ -99,7 +101,7 @@ class FunctionDefinition
     {
         $parameter_definitions = [];
         foreach ($this->parameters as $parameter) {
-            unset($parameter['name']);
+            unset($parameter["name"]);
             $parameter_definitions[] = $parameter;
         }
 
@@ -110,7 +112,7 @@ class FunctionDefinition
                 "type" => "object",
                 "properties" => $this->parameters,
                 "required" => array_keys($this->parameters),
-            ]
+            ],
         ];
     }
 }
