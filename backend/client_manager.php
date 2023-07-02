@@ -97,7 +97,7 @@ class FunctionDefinition
         return [
             "name" => $this->name,
             "description" => $this->description,
-            "parameters" => $this->parameters,
+            // "parameters" => $this->parameters,
         ];
     }
 }

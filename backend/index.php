@@ -13,11 +13,11 @@ $dotenv->load();
 $openai_api_key = $_ENV["OPENAI_API_KEY"];
 
 $client = new OpenAIClientManager($openai_api_key, [
-    new FunctionDefinition("bakeCake", "Bakes a cake", []),
-]);
+    new FunctionDefinition("displayCongratulationsAnimation", "Displays an eye catching congratulations animation to the user", []),
+], "gpt-4-32k");
 
 $conversation = new Conversation();
-$conversation->addMessage(new UserMessage("hello! bake a cake for me!"));
+$conversation->addMessage(new UserMessage("display congrats animation please"));
 
 $client->performConversation($conversation);
 
