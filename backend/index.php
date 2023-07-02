@@ -25,14 +25,7 @@ $client->performConversation(
         new FunctionDefinition(
             "displayCongratulatoryDialog",
             "Display a congratulatory message. If none is supplied, just display CONGRATULATIONS",
-            [
-                new ParameterDefinition(
-                    "message",
-                    "string",
-		    "the message",
-		    false
-                ),
-            ]
+            [new ParameterDefinition("message", "string", "the message", false)]
         ),
     ],
     "gpt-4-32k"
