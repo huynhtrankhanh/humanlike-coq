@@ -16,25 +16,21 @@ $client = new OpenAIClientManager($openai_api_key);
 
 $conversation = new Conversation();
 $conversation->addMessage(
-    new UserMessage("whats the weather today in bermuda")
+    new UserMessage("i gotta be uplifted please congratulate me")
 );
 
 $client->performConversation(
     $conversation,
     [
         new FunctionDefinition(
-            "get_current_weather",
-            "Get the current weather in a given location",
+            "displayCongratulatoryDialog",
+            "Display a congratulatory message. If none is supplied, just display CONGRATULATIONS",
             [
                 new ParameterDefinition(
-                    "location",
+                    "message",
                     "string",
-                    "The city and state, e.g. San Francisco, CA"
-                ),
-                new ParameterDefinition(
-                    "unit",
-                    "string",
-                    "The unit of measurement for temperature, either 'celsius' or 'fahrenheit'"
+		    "the message",
+		    false
                 ),
             ]
         ),
