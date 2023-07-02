@@ -13,3 +13,10 @@ $dotenv->load();
 $openai_api_key = $_ENV["OPENAI_API_KEY"];
 
 $client = new OpenAIClientManager($openai_api_key);
+
+$conversation = new Conversation();
+$conversation->addMessage(new UserMessage("hello!"));
+
+$client->performConversation($conversation);
+
+print_r($conversation->getMessages());
