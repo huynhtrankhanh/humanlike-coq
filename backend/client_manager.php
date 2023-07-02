@@ -13,7 +13,7 @@ class OpenAIClientManager
         Conversation $conversation,
         string $model = "gpt-3.5-turbo"
     ): void {
-        $messages = $conversation->getMessages();
+        $messages = $conversation->toArray();
 
         // Make call to OpenAI chat service
         $response = $this->client->chat()->create([

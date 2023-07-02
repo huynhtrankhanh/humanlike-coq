@@ -19,4 +19,4 @@ $conversation->addMessage(new UserMessage("hello!"));
 
 $client->performConversation($conversation);
 
-print_r($conversation->getMessages());
+print_r($conversation->toArray());

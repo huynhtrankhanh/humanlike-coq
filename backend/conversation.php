@@ -7,7 +7,7 @@ abstract class Message
 
 class UserMessage extends Message
 {
-    private string $content;
+    public string $content;
 
     public function __construct(string $content)
     {
@@ -30,8 +30,8 @@ class UserMessage extends Message
 
 class AssistantMessage extends Message
 {
-    private ?string $content;
-    private ?FunctionCall $functionCall;
+    public ?string $content;
+    public ?FunctionCall $functionCall;
 
     public function __construct(
         ?string $content,
@@ -65,8 +65,8 @@ class AssistantMessage extends Message
 
 class FunctionMessage extends Message
 {
-    private string $name;
-    private string $content;
+    public string $name;
+    public string $content;
 
     public function __construct(string $name, string $content)
     {
@@ -96,7 +96,7 @@ class FunctionMessage extends Message
 
 class Conversation
 {
-    private array $messages;
+    public array $messages;
 
     public function __construct()
     {
@@ -108,7 +108,7 @@ class Conversation
         $this->messages[] = $message;
     }
 
-    public function getMessages(): array
+    public function toArray(): array
     {
         return array_map(function ($message) {
             return $message->toArray();
@@ -118,8 +118,8 @@ class Conversation
 
 class FunctionCall
 {
-    private string $name;
-    private string $arguments;
+    public string $name;
+    public string $arguments;
 
     public function __construct(string $name, string $arguments)
     {
