@@ -16,7 +16,7 @@ $client = new OpenAIClientManager($openai_api_key);
 
 $conversation = new Conversation();
 $conversation->addMessage(
-    new UserMessage("i gotta be uplifted please congratulate me")
+    new UserMessage("bake me a cake")
 );
 
 $client->performConversation(
@@ -27,6 +27,7 @@ $client->performConversation(
             "Display a congratulatory message. If none is supplied, just display CONGRATULATIONS",
             [new ParameterDefinition("message", "string", "the message", false)]
         ),
+	new FunctionDefinition("bakeCake", "Bake a cake", []),
     ],
     "gpt-4-32k"
 );
