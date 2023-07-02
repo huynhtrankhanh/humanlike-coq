@@ -17,10 +17,10 @@ class OpenAIClientManager
         $messages = $conversation->toArray();
 
         $functionList = [];
-        foreach($functions as $function) {
-          if ($function instanceof FunctionDefinition) {
-            $functionList[] = $function->getDefinition();
-          }
+        foreach ($functions as $function) {
+            if ($function instanceof FunctionDefinition) {
+                $functionList[] = $function->getDefinition();
+            }
         }
 
         $payload = [
@@ -65,7 +65,7 @@ class Parameter
     {
         return [
             "type" => $this->type,
-            "description" => $this->description
+            "description" => $this->description,
         ];
     }
 }
@@ -76,8 +76,11 @@ class FunctionDefinition
     private string $description; // Description of the function
     private array $parameters; // Array of parameters required by function
 
-    public function __construct(string $name, string $description, array $parameters = [])
-    {
+    public function __construct(
+        string $name,
+        string $description,
+        array $parameters = []
+    ) {
         $this->name = $name;
         $this->description = $description;
 
@@ -92,9 +95,9 @@ class FunctionDefinition
     public function getDefinition(): array
     {
         return [
-            'name' => $this->name,
-            'description' => $this->description,
-            'parameters' => $this->parameters
+            "name" => $this->name,
+            "description" => $this->description,
+            "parameters" => $this->parameters,
         ];
     }
 }
