@@ -124,7 +124,7 @@ class FunctionDefinition
             "description" => $this->description,
             "parameters" => [
                 "type" => "object",
-                "properties" => (object)($this->parameters),
+                "properties" => (object) $this->parameters,
                 "required" => array_keys($requiredParameters),
             ],
         ];
