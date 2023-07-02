@@ -12,4 +12,4 @@ $dotenv->load();
 
 $openai_api_key = $_ENV["OPENAI_API_KEY"];
 
-$client = new OpenAIClientManager($openai_api_key)
+$client = new OpenAIClientManager($openai_api_key);
