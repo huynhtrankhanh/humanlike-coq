@@ -12,10 +12,12 @@ $dotenv->load();
 
 $openai_api_key = $_ENV["OPENAI_API_KEY"];
 
-$client = new OpenAIClientManager($openai_api_key);
+$client = new OpenAIClientManager($openai_api_key, [
+  new FunctionDefinition("bakeCake", "Bakes a cake", [])
+]);
 
 $conversation = new Conversation();
-$conversation->addMessage(new UserMessage("hello!"));
+$conversation->addMessage(new UserMessage("hello! bake a cake for me!"));
 
 $client->performConversation($conversation);
 
