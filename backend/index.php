@@ -14,9 +14,7 @@ $client = new OpenAIClientManager($openai_api_key);
 $functionHandler = new FunctionHandler();
 
 $conversation = new Conversation();
-$conversation->addMessage(
-    new UserMessage("bake a cake")
-);
+$conversation->addMessage(new UserMessage("bake a cake"));
 $functions = [
     new FunctionDefinition(
         "displayCongratulatoryDialog",
