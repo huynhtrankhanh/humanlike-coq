@@ -18,7 +18,11 @@ $conversation->addMessage(
     new UserMessage("bake me a cake and display a congratulatory message")
 );
 $functions = [
-    new FunctionDefinition("displayCongratulatoryDialog", "Display a congratulatory message.", [new ParameterDefinition("message", "string", "the message", true)]),
+    new FunctionDefinition(
+        "displayCongratulatoryDialog",
+        "Display a congratulatory message.",
+        [new ParameterDefinition("message", "string", "the message", true)]
+    ),
     new FunctionDefinition("bakeCake", "Bake a cake.", []),
 ];
 
@@ -28,10 +32,21 @@ while ($isLastMessageFunctionCall) {
     $client->performConversation($conversation, $functions, "gpt-4-32k");
     $lastMessageIndex = array_key_last($conversation->toArray());
     $lastMessage = $conversation->toArray()[$lastMessageIndex];
-    if ($lastMessage["role"] === "assistant" && isset($lastMessage["function_call"])) {
-        $lastMessageFunctionCall = new FunctionCall($lastMessage['function_call']['name'], $lastMessage['function_call']['arguments']);
-        $responseMessage = $functionHandler->handleFunction($lastMessageFunctionCall);
-        $completionMessage = new FunctionMessage($lastMessageFunctionCall->name, $responseMessage);
+    if (
+        $lastMessage["role"] === "assistant" &&
+        isset($lastMessage["function_call"])
+    ) {
+        $lastMessageFunctionCall = new FunctionCall(
+            $lastMessage["function_call"]["name"],
+            $lastMessage["function_call"]["arguments"]
+        );
+        $responseMessage = $functionHandler->handleFunction(
+            $lastMessageFunctionCall
+        );
+        $completionMessage = new FunctionMessage(
+            $lastMessageFunctionCall->name,
+            $responseMessage
+        );
         $conversation->addMessage($completionMessage);
     } else {
         $isLastMessageFunctionCall = false;
