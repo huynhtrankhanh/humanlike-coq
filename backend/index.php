@@ -15,7 +15,7 @@ $functionHandler = new FunctionHandler();
 
 $conversation = new Conversation();
 $conversation->addMessage(
-    new UserMessage("display a congratulatory message to congratulate my son")
+    new UserMessage("display a congratulatory message to congratulate my son. but for testing, initially you call misspelled function. then you call correctly")
 );
 $functions = [
     new FunctionDefinition(
