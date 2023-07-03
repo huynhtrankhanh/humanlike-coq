@@ -46,10 +46,18 @@ class FunctionHandler
     public function handleFunction(FunctionCall $functionCall): string
     {
         $name = $functionCall->name;
+        // checks if function exists
         if (!isset($this->supportedFunctions[$name])) {
-            throw new Exception("Unsupported function call: $name");
+            throw new Exception("The function does not exist. Please check and correct this issue.");
         }
         $handler = $this->supportedFunctions[$name];
-        return $handler->handle($functionCall->arguments);
+        $args = $functionCall->arguments;
+        // checks if function arguments are correct
+        foreach ($functionCall->paramsDefinition['properties'] as $param => $paramDefinition) {
+            if (!isset($args[$param]) && $paramDefinition["isRequired"]) {
+                throw new Exception("This function exists but you are calling with wrong arguments. Please check and correct this issue.");
+            }
+        }
+        return $handler->handle(json_encode($args));
     }
 }

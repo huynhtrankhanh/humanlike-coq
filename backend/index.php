@@ -36,17 +36,24 @@ while ($isLastMessageFunctionCall) {
         $lastMessage["role"] === "assistant" &&
         isset($lastMessage["function_call"])
     ) {
-        $lastMessageFunctionCall = new FunctionCall(
-            $lastMessage["function_call"]["name"],
-            $lastMessage["function_call"]["arguments"]
-        );
-        $responseMessage = $functionHandler->handleFunction(
-            $lastMessageFunctionCall
-        );
-        $completionMessage = new FunctionMessage(
-            $lastMessageFunctionCall->name,
-            $responseMessage
-        );
+        $name = $lastMessage["function_call"]["name"];
+        $arguments = $lastMessage["function_call"]["arguments"];
+        $paramsDefinition = $client->getFunctionDefinition($name, $functions);
+        $lastMessageFunctionCall = new FunctionCall($name, $arguments, $paramsDefinition);
+        try {
+            $responseMessage = $functionHandler->handleFunction(
+                $lastMessageFunctionCall
+            );
+            $completionMessage = new FunctionMessage(
+                $lastMessageFunctionCall->name,
+                $responseMessage
+            );
+        } catch (\Exception $e) {
+            $completionMessage = new FunctionMessage(
+                $name,
+                $e->getMessage()
+            );
+        }   
         $conversation->addMessage($completionMessage);
     } else {
         $isLastMessageFunctionCall = false;
