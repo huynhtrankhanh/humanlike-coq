@@ -15,7 +15,9 @@ $openai_api_key = $_ENV["OPENAI_API_KEY"];
 $client = new OpenAIClientManager($openai_api_key);
 
 $conversation = new Conversation();
-$conversation->addMessage(new UserMessage("bake me a cake"));
+$conversation->addMessage(
+    new UserMessage("bake me a cake and display a congratulatory message")
+);
 
 $client->performConversation(
     $conversation,
