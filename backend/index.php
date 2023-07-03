@@ -19,17 +19,38 @@ $conversation->addMessage(
     new UserMessage("bake me a cake and display a congratulatory message")
 );
 
-$client->performConversation(
-    $conversation,
-    [
-        new FunctionDefinition(
-            "displayCongratulatoryDialog",
-            "Display a congratulatory message. If none is supplied, just display CONGRATULATIONS",
-            [new ParameterDefinition("message", "string", "the message", false)]
-        ),
-        new FunctionDefinition("bakeCake", "Bake a cake", []),
-    ],
-    "gpt-4-32k"
-);
+$functions = [
+    new FunctionDefinition(
+        "displayCongratulatoryDialog",
+        "Display a congratulatory message. If none is supplied, just display 'CONGRATULATIONS'.",
+        [new ParameterDefinition("message", "string", "the message", false)]
+    ),
+    new FunctionDefinition("bakeCake", "Bake a cake.", []),
+];
+
+$isLastMessageFunctionCall = true;
+while ($isLastMessageFunctionCall) {
+    $client->performConversation($conversation, $functions, "gpt_4-32k");
+
+    $lastMessageIndex = array_key_last($conversation->toArray());
+    $lastMessage = $conversation->toArray()[$lastMessageIndex];
+
+    if ($lastMessage["role"] === "assistant" && isset($lastMessage["function_call"])) {
+        $lastMessageFunctionCallName = $lastMessage["function_call"]["name"];
+        if ($lastMessageFunctionCallName === "displayCongratulatoryDialog") {
+            echo "Triggered congratulations.\n";
+            $congratulationsMessage = new FunctionMessage("displayCongratulatoryDialog", 
+                                                          "Congratulatory message displayed successfully.");
+            $conversation->addMessage($congratulationsMessage);
+        } elseif ($lastMessageFunctionCallName === "bakeCake") {
+            echo "Triggered bake cake.\n";
+            $bakeCakeMessage = new FunctionMessage("bakeCake", 
+                                                   "Cake has been baked successfully.");
+            $conversation->addMessage($bakeCakeMessage);
+        }
+    } else {
+        $isLastMessageFunctionCall = false;
+    }
+}
 
 print_r($conversation->toArray());
