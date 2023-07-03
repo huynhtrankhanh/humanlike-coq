@@ -3,15 +3,14 @@ declare(strict_types=1);
 
 interface IFunction
 {
-    public function handle(string $args = ""): string;
+    public function handle(array $args): string;
 }
 
 class DisplayCongratulatoryDialogHandler implements IFunction
 {
-    public function handle(string $args = ""): string
+    public function handle(array $args): string
     {
-        $argsArray = json_decode($args, true);
-        $message = $argsArray["message"] ?? "CONGRATULATIONS";
+        $message = $args["message"];
         echo "Triggered congratulations with message: $message\n";
         return "Displayed message: '$message'.";
     }
@@ -19,7 +18,7 @@ class DisplayCongratulatoryDialogHandler implements IFunction
 
 class BakeCakeHandler implements IFunction
 {
-    public function handle(string $args = ""): string
+    public function handle(array $args): string
     {
         echo "Triggered bake cake.\n";
         return "Cake has been baked successfully.";
@@ -74,6 +73,6 @@ class FunctionHandler
                 );
             }
         }
-        return $handler->handle(json_encode($args));
+        return $handler->handle($args);
     }
 }
