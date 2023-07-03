@@ -15,7 +15,7 @@ $functionHandler = new FunctionHandler();
 
 $conversation = new Conversation();
 $conversation->addMessage(
-    new UserMessage("bake me a cake and display a congratulatory message")
+    new UserMessage("display a congratulatory message to congratulate my son")
 );
 $functions = [
     new FunctionDefinition(
@@ -41,12 +41,12 @@ while ($isLastMessageFunctionCall) {
         $paramsDefinition = $client->getFunctionDefinition($name, $functions);
         $lastMessageFunctionCall = new FunctionCall(
             $name,
-            $arguments,
-            $paramsDefinition
+            $arguments
         );
         try {
             $responseMessage = $functionHandler->handleFunction(
-                $lastMessageFunctionCall
+                $lastMessageFunctionCall,
+		$paramsDefinition
             );
             $completionMessage = new FunctionMessage(
                 $lastMessageFunctionCall->name,

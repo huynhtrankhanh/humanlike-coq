@@ -49,6 +49,16 @@ class OpenAIClientManager
 
         $conversation->addMessage($assistantMessage);
     }
+
+    public function getFunctionDefinition($functionName, $functions): array
+    {
+        foreach ($functions as $function) {
+            if ($function->getDefinition()["name"] == $functionName) {
+                return $function->getDefinition()["parameters"];
+            }
+        }
+        return [];
+    }
 }
 
 class ParameterDefinition
@@ -128,15 +138,5 @@ class FunctionDefinition
                 "required" => array_keys($requiredParameters),
             ],
         ];
-    }
-
-    public function getFunctionDefinition($functionName, $functions): array
-    {
-        foreach ($functions as $function) {
-            if ($function->name == $functionName) {
-                return $function->toArray()["parameters"];
-            }
-        }
-        return [];
     }
 }
