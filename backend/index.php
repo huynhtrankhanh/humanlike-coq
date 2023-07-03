@@ -30,7 +30,7 @@ $functions = [
 
 $isLastMessageFunctionCall = true;
 while ($isLastMessageFunctionCall) {
-    $client->performConversation($conversation, $functions, "gpt_4-32k");
+    $client->performConversation($conversation, $functions, "gpt-4-32k");
 
     $lastMessageIndex = array_key_last($conversation->toArray());
     $lastMessage = $conversation->toArray()[$lastMessageIndex];
