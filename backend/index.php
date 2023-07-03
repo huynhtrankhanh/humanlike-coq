@@ -14,7 +14,7 @@ $client = new OpenAIClientManager($openai_api_key);
 $functionHandler = new FunctionHandler();
 
 $conversation = new Conversation();
-$conversation->addMessage(new UserMessage("bake a cake"));
+$conversation->addMessage(new UserMessage("bake 5 times. to do that, bake, then wait, then continue"));
 $functions = [
     new FunctionDefinition(
         "displayCongratulatoryDialog",
@@ -27,7 +27,7 @@ $functions = [
 $isLastMessageFunctionCall = true;
 
 while ($isLastMessageFunctionCall) {
-    $client->performConversation($conversation, $functions, "gpt-4-32k");
+    $client->performConversation($conversation, $functions, "gpt-3.5-turbo");
     $lastMessageIndex = array_key_last($conversation->toArray());
     $lastMessage = $conversation->toArray()[$lastMessageIndex];
     if (
