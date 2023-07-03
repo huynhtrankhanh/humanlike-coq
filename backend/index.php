@@ -35,17 +35,24 @@ while ($isLastMessageFunctionCall) {
     $lastMessageIndex = array_key_last($conversation->toArray());
     $lastMessage = $conversation->toArray()[$lastMessageIndex];
 
-    if ($lastMessage["role"] === "assistant" && isset($lastMessage["function_call"])) {
+    if (
+        $lastMessage["role"] === "assistant" &&
+        isset($lastMessage["function_call"])
+    ) {
         $lastMessageFunctionCallName = $lastMessage["function_call"]["name"];
         if ($lastMessageFunctionCallName === "displayCongratulatoryDialog") {
             echo "Triggered congratulations.\n";
-            $congratulationsMessage = new FunctionMessage("displayCongratulatoryDialog", 
-                                                          "Congratulatory message displayed successfully.");
+            $congratulationsMessage = new FunctionMessage(
+                "displayCongratulatoryDialog",
+                "Congratulatory message displayed successfully."
+            );
             $conversation->addMessage($congratulationsMessage);
         } elseif ($lastMessageFunctionCallName === "bakeCake") {
             echo "Triggered bake cake.\n";
-            $bakeCakeMessage = new FunctionMessage("bakeCake", 
-                                                   "Cake has been baked successfully.");
+            $bakeCakeMessage = new FunctionMessage(
+                "bakeCake",
+                "Cake has been baked successfully."
+            );
             $conversation->addMessage($bakeCakeMessage);
         }
     } else {
