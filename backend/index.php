@@ -23,10 +23,10 @@ $functions = [
     ),
     new FunctionDefinition("bakeCake", "Bake a cake.", []),
     new FunctionDefinition(
-	    "blockUserFromOpenAI",
-	    "Block the user from chatting with you ever again.",
-	    [new ParameterDefinition("reason", "string", "the reason", true)]
-    )
+        "blockUserFromOpenAI",
+        "Block the user from chatting with you ever again.",
+        [new ParameterDefinition("reason", "string", "the reason", true)]
+    ),
 ];
 
 $isLastMessageFunctionCall = true;

@@ -43,7 +43,7 @@ class FunctionHandler
         $this->supportedFunctions = [
             "displayCongratulatoryDialog" => new DisplayCongratulatoryDialogHandler(),
             "bakeCake" => new BakeCakeHandler(),
-	    "blockUserFromOpenAI" => new BlockUserFromOpenAIHandler(),
+            "blockUserFromOpenAI" => new BlockUserFromOpenAIHandler(),
         ];
     }
 
