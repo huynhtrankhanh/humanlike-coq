@@ -39,14 +39,11 @@ while ($isLastMessageFunctionCall) {
         $name = $lastMessage["function_call"]["name"];
         $arguments = $lastMessage["function_call"]["arguments"];
         $paramsDefinition = $client->getFunctionDefinition($name, $functions);
-        $lastMessageFunctionCall = new FunctionCall(
-            $name,
-            $arguments
-        );
+        $lastMessageFunctionCall = new FunctionCall($name, $arguments);
         try {
             $responseMessage = $functionHandler->handleFunction(
                 $lastMessageFunctionCall,
-		$paramsDefinition
+                $paramsDefinition
             );
             $completionMessage = new FunctionMessage(
                 $lastMessageFunctionCall->name,

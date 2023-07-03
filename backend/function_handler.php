@@ -43,8 +43,10 @@ class FunctionHandler
         $this->supportedFunctions[$name] = $function;
     }
 
-    public function handleFunction(FunctionCall $functionCall, array $paramsDefinition): string
-    {
+    public function handleFunction(
+        FunctionCall $functionCall,
+        array $paramsDefinition
+    ): string {
         $name = $functionCall->name;
         // checks if function exists
         if (!isset($this->supportedFunctions[$name])) {
@@ -55,9 +57,11 @@ class FunctionHandler
         $handler = $this->supportedFunctions[$name];
         $args = json_decode($functionCall->arguments, true);
 
-	if ($args == null) {
-		throw new Exception("Invalid JSON object. Please check and correct this issue.");
-	}
+        if ($args == null) {
+            throw new Exception(
+                "Invalid JSON object. Please check and correct this issue."
+            );
+        }
 
         // checks if function arguments are correct
         foreach (
