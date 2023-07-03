@@ -39,7 +39,11 @@ while ($isLastMessageFunctionCall) {
         $name = $lastMessage["function_call"]["name"];
         $arguments = $lastMessage["function_call"]["arguments"];
         $paramsDefinition = $client->getFunctionDefinition($name, $functions);
-        $lastMessageFunctionCall = new FunctionCall($name, $arguments, $paramsDefinition);
+        $lastMessageFunctionCall = new FunctionCall(
+            $name,
+            $arguments,
+            $paramsDefinition
+        );
         try {
             $responseMessage = $functionHandler->handleFunction(
                 $lastMessageFunctionCall
@@ -49,11 +53,8 @@ while ($isLastMessageFunctionCall) {
                 $responseMessage
             );
         } catch (\Exception $e) {
-            $completionMessage = new FunctionMessage(
-                $name,
-                $e->getMessage()
-            );
-        }   
+            $completionMessage = new FunctionMessage($name, $e->getMessage());
+        }
         $conversation->addMessage($completionMessage);
     } else {
         $isLastMessageFunctionCall = false;

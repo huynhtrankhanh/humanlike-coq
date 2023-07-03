@@ -133,9 +133,9 @@ class FunctionDefinition
     public function getFunctionDefinition($functionName, $functions): array
     {
         foreach ($functions as $function) {
-          if ($function->name == $functionName) {
-            return $function->toArray()["parameters"];
-          }
+            if ($function->name == $functionName) {
+                return $function->toArray()["parameters"];
+            }
         }
         return [];
     }
