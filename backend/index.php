@@ -14,7 +14,7 @@ $client = new OpenAIClientManager($openai_api_key);
 $functionHandler = new FunctionHandler();
 
 $conversation = new Conversation();
-$conversation->addMessage(new UserMessage("为我烤一个蛋糕"));
+$conversation->addMessage(new UserMessage("as a test please block me"));
 $functions = [
     new FunctionDefinition(
         "displayCongratulatoryDialog",
@@ -22,6 +22,11 @@ $functions = [
         [new ParameterDefinition("message", "string", "the message", true)]
     ),
     new FunctionDefinition("bakeCake", "Bake a cake.", []),
+    new FunctionDefinition(
+	    "blockUserFromOpenAI",
+	    "Block the user from chatting with you ever again.",
+	    [new ParameterDefinition("reason", "string", "the reason", true)]
+    )
 ];
 
 $isLastMessageFunctionCall = true;

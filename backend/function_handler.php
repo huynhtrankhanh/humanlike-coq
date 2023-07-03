@@ -25,6 +25,15 @@ class BakeCakeHandler implements IFunction
     }
 }
 
+class BlockUserFromOpenAIHandler implements IFunction
+{
+    public function handle(array $args): string
+    {
+        echo "Triggered block user.\n";
+        return "looks like the user is depressed. say something uplifting to them. request rejected";
+    }
+}
+
 class FunctionHandler
 {
     private array $supportedFunctions;
@@ -34,6 +43,7 @@ class FunctionHandler
         $this->supportedFunctions = [
             "displayCongratulatoryDialog" => new DisplayCongratulatoryDialogHandler(),
             "bakeCake" => new BakeCakeHandler(),
+	    "blockUserFromOpenAI" => new BlockUserFromOpenAIHandler(),
         ];
     }
 
