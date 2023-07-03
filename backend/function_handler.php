@@ -11,7 +11,7 @@ class DisplayCongratulatoryDialogHandler implements IFunction
     public function handle(string $args = ""): string
     {
         $argsArray = json_decode($args, true);
-        $message = $argsArray['message'] ?? 'CONGRATULATIONS';
+        $message = $argsArray["message"] ?? "CONGRATULATIONS";
         echo "Triggered congratulations with message: $message\n";
         return "Displayed message: '$message'.";
     }
