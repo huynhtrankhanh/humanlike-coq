@@ -56,7 +56,7 @@ class FunctionHandler
         $handler = $this->supportedFunctions[$name];
         $args = json_decode($functionCall->arguments, true);
 
-        if ($args == null) {
+        if ($args === null) {
             throw new Exception(
                 "Invalid JSON object. Please check and correct this issue."
             );
